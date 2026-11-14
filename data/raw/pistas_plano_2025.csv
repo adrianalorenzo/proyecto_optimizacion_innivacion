@@ -1,0 +1,135 @@
+code,nombre,desnivel_m,longitud_m,superficie_m2,nieve_producida
+L-2,Puerta de Laguna,195,632,12645,0
+L-3,Trucha,613,2277,158405,1
+P-1,Sector 1 Sulayr,85,440,5280,0
+P-2,Sector 2 (Slope Style),200,790,23700,1
+P-3,Sector 3,60,873,26121,1
+P-4,Ski/Snowboard Cross,155,750,30000,1
+J-1,Jardín de Nieve,5,120,2392,1
+R-1,Ribera del Genil,85,999,5993,1
+R-2,Levante,155,1169,16518,1
+R-3,Maribel,360,2088,58495,1
+R-4,Zaragatillo,30,271,2165,0
+R-5,El Río,550,3258,180883,1
+R-6,Burladero,55,220,7906,1
+R-7,Ramal de Jara,21,164,6560,1
+M-1,Visera,120,436,20931,0
+M-2,Trampolín,105,390,13200,0
+M-3,Cecilio,105,770,33873,0
+M-4,Loma Dílar,670,3833,164055,1
+M-5,Poniente,150,978,35223,0
+M-6,Radiotelescopio,125,635,20442,0
+M-7,Manzanilla,190,751,15021,0
+M-8,Los Topos,45,445,2670,0
+M-9,Zahareña,200,1144,49115,1
+M-10,Vuelta a la Zahareña,40,466,2798,0
+M-11,Cascajar,65,297,5941,0
+M-12,Peñón del Dílar,315,1710,51300,0
+M-13,Piornos,160,705,28220,0
+M-14,Violetas,250,1046,50206,0
+M-15,Prado de las Monjas,300,1148,68854,0
+M-16,Cantera,22,243,1459,0
+M-17,Morenita,55,225,4498,0
+M-18,Montebajo,370,1995,66604,0
+M-19,Villén,260,1139,44990,1
+M-20,Tropical,194,680,16320,1
+M-21,Monachil,160,564,24830,0
+M-22,Chirimoya,30,445,9338,0
+M-23,Víbora,160,677,25834,1
+M-24,Boulevard,40,458,4581,1
+M-25,Genciana,60,442,10610,0
+M-26,Estrella de las Nieves,60,431,15511,0
+M-27,Fuente del Tesoro,285,942,49014,1
+M-28,Tubo del Enebro,170,493,17733,1
+M-29,El Paso,35,159,5711,1
+M-30,Neveros,265,913,43899,0
+M-31,Diploma,275,950,22860,0
+M-32,El Puente,200,863,48348,0
+M-33,Mirador,160,533,22377,0
+M-34,Variante El Puente,90,341,13656,0
+M-35,Variante Loma Dílar,50,600,6000,0
+M-36,Salida puente I,25,340,3400,0
+M-37,Pista Half Pipe,80,410,4100,0
+M-38,Acceso pista Half Pipe,20,200,2000,0
+C-1,Divisoria,150,805,12880,0
+C-2,Mª José Rienda,285,975,39018,0
+C-3,Variante de Rienda,60,296,11838,0
+C-4,Pandereta,185,688,16512,0
+C-5,Universiada,640,2312,79323,1
+C-6,Solynieve,450,1775,64051,0
+C-7,Escape,103,579,6979,0
+C-8,Ventisquero Cauchiles,145,938,33766,0
+C-9,Sol y Sombra,85,297,8329,0
+C-10,Paco Fdez. Ochoa,240,954,42021,0
+C-11,Variante de Paco,110,360,12969,0
+C-12,Copa del Mundo,340,1219,45347,1
+C-13,Edelweiss,60,280,6690,0
+C-14,La Directa,120,1748,10489,0
+C-15,Puerta Elvira,65,729,4375,1
+C-16,Puerta Monaita,40,580,3482,1
+C-17,Arco de las Pesas,25,289,1731,1
+C-18,Puerta de Fajaluaza,40,268,1607,1
+B-35,Piñata 1,100,629,12571,1
+B-36,Piñata 2,70,459,9178,1
+B-37,La Peña,80,439,14942,1
+B-1,El Bosque,25,392,7845,1
+B-2,Principiantes 1,114,806,80582,0
+B-3,Principiantes 2,114,792,79156,0
+B-4,Principiantes 3,95,1017,57178,0
+B-5,Principiantes 4,16,213,10641,0
+B-6,Principiantes 5,9,121,5318,1
+B-7,Principiantes 6,4,83,1320,1
+B-8,Principiantes 7,4,83,1320,1
+B-9,Super verde,90,356,6408,0
+B-10,Paralelo,70,413,18180,1
+B-11,Amapola,75,382,12224,0
+B-12,Perdiz,230,1467,79259,0
+B-13,Diagonal Balsa,50,714,8563,1
+B-14,Peseta,115,768,33812,0
+B-15,Tubo Borreguiles,190,1061,24418,0
+B-16,Peñones,223,1022,42393,1
+B-17,Zorro,370,1850,93473,0
+B-18,La Laja,130,586,16411,0
+B-19,Chotacabras,70,260,6240,1
+B-20,Pala de Entrenamiento,150,699,22394,0
+B-21,La Playa,40,141,5079,1
+B-22,Termópilas,35,182,2182,0
+B-23,Torrecillas,105,543,13042,0
+B-24,Ardilla,30,218,2616,1
+B-25,Rebeco,505,2327,114867,1
+B-26,Zacatín,165,500,16014,1
+B-27,Variante de Morillas,145,633,23301,0
+B-28,Morillas,205,759,26835,0
+B-29,Granados,395,1394,58240,1
+B-30,Espolón de Alcazaba,60,174,4874,0
+B-31,Diagonal de Cauchiles,40,528,3168,0
+B-32,Diagonal de San Juan,68,760,5061,0
+B-33,Panorámica II,175,1005,52265,0
+B-34,Collado de Borreguiles,150,1061,15664,0
+L-4,Cuesta de las Artesillas,70,549,7116,0
+L-5,Pala de las Artesillas,65,332,6646,0
+L-6,W,404,1372,32928,0
+L-7,Lagunillos,335,1080,38879,0
+L-8,Olímpica,695,3476,169143,0
+L-9,Sociedad de la Nieve,315,2251,79934,0
+L-10,Los Bancos,200,960,26883,0
+L-11,Las Cornisas,40,258,7216,0
+L-12,Fraile,110,445,14246,0
+L-13,Las Campanas,105,504,12096,0
+L-14,Monaguillo,240,1293,41370,0
+L-15,Mottaret,165,789,31558,0
+L-16,Carnero,190,981,38683,0
+L-17,Henry,135,685,30131,0
+L-18,Collado Alto,135,463,16676,0
+L-19,Carril del Collado,5,363,2176,0
+L-20,Collad de la Laguna,50,274,4379,0
+L-21,Solana,255,1238,19815,0
+L-1,Dorada,90,992,51603,0
+Z-1,Águila,1152,6329,140073,1
+Z-2,Tobogán,71,786,4718,0
+Z-3,Lastrón,220,588,16463,0
+Z-4,Descenso Damas,85,245,6856,0
+Z-5,Descenso Hombres,170,607,19511,0
+Z-6,Tubo del Veleta,248,817,25778,0
+Z-7,Panorámica,350,1116,58011,0
+Z-8,Cordón,350,1153,50719,0
