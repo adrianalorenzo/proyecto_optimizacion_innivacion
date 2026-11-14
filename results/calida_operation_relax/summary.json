@@ -1,0 +1,15 @@
+{
+  "escenario": "calida",
+  "modo": "operation",
+  "solver": "gurobi",
+  "dias": 53,
+  "x_continua": true,
+  "estado": "optimal",
+  "objetivo": 78033.04,
+  "gap": 0.0,
+  "t_construccion_s": 0.5,
+  "t_resolucion_s": 0.7,
+  "variables": 28144,
+  "enteras_o_binarias": 901,
+  "restricciones": 28091
+}
