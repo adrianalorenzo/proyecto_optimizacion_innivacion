@@ -1,18 +1,18 @@
-p,nombre,length_km,V,S0,lift_capacity
-S1,Principiantes Borreguiles,2.74,21900,,5650
-S2,Borreguiles medio,2.35,19500,,1440
-S3,Borreguiles bajadas,4.22,56700,,2850
-S4,El Río,3.64,58500,,4975
-S5,Maribel,4.26,24300,,1067
-S6,Loma Dílar,4.98,63900,,1415
-S7,Monachil–Villén,4.55,49200,,3630
-S8,Snowpark Sulayr,2.41,24000,,2370
-S9,Laguna (Trucha),2.28,47400,,4430
-S10,Cauchiles–Parador,5.40,40800,,2017
-S11,Águila,6.33,42000,,950
-S12,Principiantes ampliación,3.18,70200,,4452
-S13,Zorro–Peseta,3.68,45500,,1440
-S14,Perdiz–Panorámica II,2.85,43100,,2500
-S15,Prado de las Monjas–Violetas,2.19,35700,,1415
-S16,Olímpica,3.48,50700,,950
-S17,Cauchiles ampliación,3.70,43500,,1067
+p,nombre,length_km,V,S0,lift_capacity,area_m2
+S1,Principiantes Borreguiles,2.74,21900,0,5650,73066
+S2,Borreguiles medio,2.35,19500,0,1440,64891
+S3,Borreguiles bajadas,4.22,56700,,2850,189121
+S4,El Río,3.64,585000,,4975,195349
+S5,Maribel,4.26,24300,0,1067,81006
+S6,Loma Dílar,4.98,63900,0,1415,213170
+S7,Monachil–Villén,4.55,49200,0,3630,164183
+S8,Snowpark Sulayr,2.41,24000,0,2370,79821
+S9,Laguna (Trucha),2.28,47400,0,4430,158405
+S10,Cauchiles–Parador,5.40,40800,0,2017,135865
+S11,Águila,6.33,42000,0,950,140073
+S12,Principiantes ampliación,3.18,70200,0,4452,233965
+S13,Zorro–Peseta,3.68,45500,0,1440,151703
+S14,Perdiz–Panorámica II,2.85,43100,0,2500,143748
+S15,Prado de las Monjas–Violetas,2.19,35700,0,1415,119060
+S16,Olímpica,3.48,50700,0,950,169143
+S17,Cauchiles ampliación,3.70,43500,,1067,145090
