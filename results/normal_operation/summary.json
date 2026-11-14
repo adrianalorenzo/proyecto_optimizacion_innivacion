@@ -1,0 +1,15 @@
+{
+  "escenario": "normal",
+  "modo": "operation",
+  "solver": "appsi_highs",
+  "dias": 53,
+  "x_continua": false,
+  "estado": "optimal",
+  "objetivo": 131619.46,
+  "gap": 0.00808,
+  "t_construccion_s": 0.7,
+  "t_resolucion_s": 1.7,
+  "variables": 28144,
+  "enteras_o_binarias": 27189,
+  "restricciones": 28091
+}
