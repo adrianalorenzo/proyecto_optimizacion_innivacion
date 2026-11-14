@@ -1,0 +1,6 @@
+escenario,temporada_base,dT,prod_FAN_m3_por_canon,pct_bloques_aptos_FAN,perdida_media_pct_dia
+fria,2020/2021,0.0,42835.0,48.2,2.72
+normal,2019/2020,0.0,29027.0,37.4,4.58
+calida,2022/2023,0.0,15992.0,26.7,3.7
+normal_plus1,2019/2020,1.0,22944.0,30.7,5.59
+normal_plus2,2019/2020,2.0,17639.0,24.0,6.71
