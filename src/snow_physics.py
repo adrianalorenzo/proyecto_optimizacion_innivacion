@@ -4,7 +4,7 @@ snow_physics.py  —  Persona A, tarea A4: pérdidas de nieve, nieve natural y n
 Calcula, para cada temporada (escenario), sector p y día d:
     DELTA_{p,d}  tasa de pérdida diaria (fracción de la nieve que se pierde)
     Z_{p,d}      nieve natural caída, en m³ de nieve pisada equivalente
-y la nieve inicial S0_p.
+(La nieve inicial S0_p va en la columna S0 de pistas.csv; ver punto 3.)
 
 1) Pérdidas: modelo grado-día + evaposublimación
 ------------------------------------------------
@@ -34,6 +34,7 @@ queda vacío).
 3) Nieve inicial
 ----------------
 S0_p = 0: el 15 de noviembre se supone que no hay base de nieve en pista.
+Se escribe a mano en la columna S0 de pistas.csv (fichero compartido con B).
 
 Fuentes
 -------
@@ -125,12 +126,9 @@ def main() -> None:
         summary.append((f"{season}/{season + 1}", round(snow["Delta"].mean() * 100, 2),
                         round(surv * 100, 1)))
 
-    pd.DataFrame({"p": alt.index, "S0": 0.0}).to_csv(
-        ROOT / "data" / "processed" / "initial_snow.csv", index=False)
-
     print(pd.DataFrame(summary, columns=["temporada", "pérdida media %/día",
                                          "% que sobrevive 53 días"]).to_string(index=False))
-    print("Listo: snow.csv en cada escenario e initial_snow.csv")
+    print("Listo: snow.csv en cada escenario")
 
 
 if __name__ == "__main__":
