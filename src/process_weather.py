@@ -90,6 +90,12 @@ def load_raw() -> pd.DataFrame:
     df = pd.concat([pd.read_csv(f, parse_dates=["datetime"])
                     for f in sorted(RAW_DIR.glob("weather_*.csv"))],
                    ignore_index=True)
+    return add_time_indices(df)
+
+
+def add_time_indices(df: pd.DataFrame) -> pd.DataFrame:
+    """Añade día d (0..52), bloque del día (0..7) y bloque t (0..423)."""
+    df = df.copy()
     start = pd.to_datetime(df["season"].astype(str) + "-11-15")
     hour_idx = ((df["datetime"] - start).dt.total_seconds() // 3600).astype(int)
     df["d"] = hour_idx // 24                       # 0..52
@@ -105,8 +111,18 @@ def load_positions() -> pd.DataFrame:
     return pos[["j", "altitude_m", "exposure"]].astype({"exposure": float})
 
 
-def hourly_by_position(df: pd.DataFrame, pos: pd.DataFrame) -> pd.DataFrame:
-    """Para cada posición y hora: T, Tw, hora ventosa y aptitud por tecnología."""
+def wind_threshold_all_seasons() -> float:
+    """Umbral de viento: percentil WIND_PERCENTILE de las 10 temporadas juntas."""
+    return load_raw()["wind_speed_10m"].quantile(WIND_PERCENTILE)
+
+
+def hourly_by_position(df: pd.DataFrame, pos: pd.DataFrame,
+                       wind_threshold: float | None = None) -> pd.DataFrame:
+    """Para cada posición y hora: T, Tw, hora ventosa y aptitud por tecnología.
+    wind_threshold: si no se da, se calcula con df (que debe tener las 10
+    temporadas). Los escenarios climáticos pasan el de las 10 temporadas."""
+    if wind_threshold is None:
+        wind_threshold = df["wind_speed_10m"].quantile(WIND_PERCENTILE)
     out = []
     for _, row in pos.iterrows():
         h = df[["season", "d", "block", "t", "datetime", "relative_humidity_2m",
@@ -116,7 +132,6 @@ def hourly_by_position(df: pd.DataFrame, pos: pd.DataFrame) -> pd.DataFrame:
         h["Tw"] = stull_wet_bulb(h["T"], h["relative_humidity_2m"])
 
         # Umbral relativo: un único umbral para las 10 temporadas juntas
-        wind_threshold = df["wind_speed_10m"].quantile(WIND_PERCENTILE)
         h["windy"] = h["wind_speed_10m"] * row["exposure"] > wind_threshold
 
         h["apt_FAN"] = (h["Tw"] <= TW_MAX_FAN) & ~h["windy"]
@@ -143,14 +158,15 @@ def to_blocks(h: pd.DataFrame) -> pd.DataFrame:
     return b.round(2)
 
 
-def write_production(blocks: pd.DataFrame) -> None:
-    """production.csv (j, k, t, A, G, E) para cada temporada = escenario."""
+def write_production(blocks: pd.DataFrame, label: str | None = None) -> None:
+    """production.csv (j, k, t, A, G, E) para cada temporada = escenario.
+    label: nombre de la carpeta del escenario (por defecto, la temporada)."""
     for season, b in blocks.groupby("season"):
         rows = [b[["j", "t", f"A_{k}", f"G_{k}", f"E_{k}"]]
                 .rename(columns={f"A_{k}": "A", f"G_{k}": "G", f"E_{k}": "E"})
                 .assign(k=k) for k in TECHS]
         prod = pd.concat(rows)[["j", "k", "t", "A", "G", "E"]].sort_values(["j", "k", "t"])
-        out = SCEN_DIR / f"{season}_{season + 1}"
+        out = SCEN_DIR / (label or f"{season}_{season + 1}")
         out.mkdir(parents=True, exist_ok=True)
         prod.to_csv(out / "production.csv", index=False)
 
