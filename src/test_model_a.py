@@ -12,8 +12,9 @@ Datos PROVISIONALES de Adri que aún no existen:
     Z     si pistas.csv no tiene area_m2 -> 0 (sin nieve natural)
     S0    si la columna está vacía -> 0
 
-Uso:   python src/test_model_a.py --scenario normal --solver gurobi
-       (en un ordenador sin Gurobi: --solver appsi_highs)
+Uso:   python src/test_model_a.py --scenario normal
+       Elige solo el solver: Gurobi (gurobipy) si está instalado y, si no,
+       HiGHS (pip install highspy). Se puede forzar con --solver.
 """
 
 import argparse
@@ -80,10 +81,27 @@ def load_test_data(scenario: str) -> dict:
     return data
 
 
+SOLVERS = ["gurobi", "gurobi_direct", "appsi_highs"]   # Gurobi (como en clase); HiGHS solo de reserva
+
+
+def pick_solver(name: str | None):
+    """Devuelve el primer solver disponible (o el pedido con --solver)."""
+    for cand in ([name] if name else SOLVERS):
+        solver = pyo.SolverFactory(cand)
+        try:
+            if solver.available(exception_flag=False):
+                print(f"Solver: {cand}")
+                return cand, solver
+        except Exception:
+            pass
+    raise RuntimeError("No hay solver MILP disponible: instala gurobipy o highspy "
+                       "(pip install highspy)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenario", default="normal")
-    ap.add_argument("--solver", default="gurobi")
+    ap.add_argument("--solver", default=None)
     args = ap.parse_args()
 
     data = load_test_data(args.scenario)
@@ -94,8 +112,8 @@ def main() -> None:
     m.obj = pyo.Objective(expr=sum(m.s[p, KEY_DAY] for p in m.P) - LAMBDA * cost,
                           sense=pyo.maximize)
 
-    solver = pyo.SolverFactory(args.solver)
-    if "gurobi" in args.solver:
+    name, solver = pick_solver(args.solver)
+    if "gurobi" in name:
         solver.options.update({"MIPGap": 0.01, "TimeLimit": 300})
     else:
         solver.options.update({"mip_rel_gap": 0.01, "time_limit": 300})

@@ -8,8 +8,12 @@ R2  Balance de nieve de cada sector
                   + Σ_{j∈J(p),k} Σ_{t∈T(d)} G_{j,k,t} x_{j,k,t}       ∀ p,d
         con s_{p,-1} = S0_p
 R5  Balance de la balsa (la cota superior B_MAX va en la variable b)
-        b_d = b_{d-1} + I_d - Σ_k PHI_k Σ_j Σ_{t∈T(d)} G_{j,k,t} x_{j,k,t}   ∀ d
+        b_d <= b_{d-1} + I_d - Σ_k PHI_k Σ_j Σ_{t∈T(d)} G_{j,k,t} x_{j,k,t}  ∀ d
         con b_{-1} = B0
+    Es "<=" y no "=": I_d es lo MÁXIMO que se puede captar del río en un día.
+    Si la balsa está llena y no se produce (días sin frío), se deja de captar
+    (o rebosa). Con "=" el modelo era infactible en la temporada cálida: la
+    balsa llena + el aporte del río superaban B_MAX los días sin producción.
 R6  Concesión de agua del horizonte / límite ε
         Σ_{j,k,t} PHI_k G_{j,k,t} x_{j,k,t} <= W_EPS
 R7  Energía y caudal máximos por bloque
@@ -53,7 +57,7 @@ def add_constraints_a(m, data: dict) -> None:
         prev = data["B0"] if i == 0 else m.b[D[i - 1]]
         used = sum(water(j, k, t) * m.x[j, k, t]
                    for j in m.J for k in m.K for t in Td[d])
-        return m.b[d] == prev + data["I"][d] - used
+        return m.b[d] <= prev + data["I"][d] - used
     m.R5 = pyo.Constraint(m.D, rule=r5)
 
     # R6 -------------------------------------------------------------------
