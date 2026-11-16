@@ -18,7 +18,7 @@ Decisiones (hay que justificarlas en el informe, apartado de datos)
   y del factor de exposición al viento. Esto es un SUPUESTO que hay que
   explicar.
 - Hora local (Europe/Madrid), porque el precio de la electricidad y los
-  bloques de 3 h van en hora local.
+  bloques de 3 h van en hora local.1.
 """
 
 from pathlib import Path
