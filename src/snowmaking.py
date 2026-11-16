@@ -1,6 +1,4 @@
 """
-snowmaking.py  —  Persona A, tarea A3: datos técnicos de cada tecnología.
-
 Aquí están las curvas de producción y los consumos de las dos tecnologías.
 Todo lo que el modelo necesita de cada equipo sale de aquí:
     G_{j,k,t}  nieve por equipo y bloque (m³)
