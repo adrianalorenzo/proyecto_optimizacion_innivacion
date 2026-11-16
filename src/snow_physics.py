@@ -1,10 +1,7 @@
 """
-snow_physics.py  —  Persona A, tarea A4: pérdidas de nieve, nieve natural y nieve inicial.
-
 Calcula, para cada temporada (escenario), sector p y día d:
     DELTA_{p,d}  tasa de pérdida diaria (fracción de la nieve que se pierde)
     Z_{p,d}      nieve natural caída, en m³ de nieve pisada equivalente
-(La nieve inicial S0_p va en la columna S0 de pistas.csv; ver punto 3.)
 
 1) Pérdidas: modelo grado-día + evaposublimación
 ------------------------------------------------

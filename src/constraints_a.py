@@ -1,6 +1,4 @@
 """
-constraints_a.py  —  Persona A, tarea A7: restricciones físicas y de recursos.
-
 R1  Solo funcionan equipos instalados y en bloques aptos
         x_{j,k,t} <= A_{j,k,t} (N0_{j,k} + n_{j,k})                 ∀ j,k,t
 R2  Balance de nieve de cada sector
