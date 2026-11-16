@@ -1,6 +1,4 @@
 """
-process_weather.py  —  Persona A, tareas A2 y A3.
-
 De los datos horarios de Open-Meteo (cota de referencia 2500 m) a datos por
 posición j y bloque de 3 h t, que es la resolución temporal del modelo.
 
@@ -32,19 +30,6 @@ Salidas (data/interim/, ficheros intermedios para la tarea A3)
 Salida para el modelo (data/processed/scenarios/<temporada>/)
 -------------------------------------------------------------
 - production.csv      j, k, t, A, G, E     (formato de la sección 5 del plan)
-
-Supuestos a explicar en el informe
-----------------------------------
-- Gradiente vertical constante de -0,65 °C/100 m (atmósfera estándar). En
-  inversiones térmicas (frecuentes de noche en invierno) es falso.
-- La humedad relativa no cambia con la cota.
-- Fórmula de Stull calibrada a presión del nivel del mar; a 2500 m el error es
-  pequeño frente a la incertidumbre del reanálisis.
-- Viento: ERA5 subestima el viento en montaña y las rachas son incoherentes
-  entre temporadas, por eso se usa un umbral relativo sobre el viento medio
-  (percentiles = parámetro de sensibilidad, tarea S-A3).
-
-Uso:  python src/process_weather.py            (desde la raíz del repo)
 """
 
 from pathlib import Path
