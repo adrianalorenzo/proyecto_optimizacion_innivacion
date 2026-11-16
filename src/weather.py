@@ -1,6 +1,4 @@
 """
-weather.py  —  Persona A, tarea A1: descarga de datos meteorológicos horarios.
-
 Qué hace
 --------
 Descarga de Open-Meteo (API histórica, reanálisis ERA5) la temperatura, la
@@ -21,11 +19,6 @@ Decisiones (hay que justificarlas en el informe, apartado de datos)
   explicar.
 - Hora local (Europe/Madrid), porque el precio de la electricidad y los
   bloques de 3 h van en hora local.
-
-Uso
----
-    pip install requests pandas
-    python src/weather.py            # desde la carpeta proyecto-nieve/
 """
 
 from pathlib import Path

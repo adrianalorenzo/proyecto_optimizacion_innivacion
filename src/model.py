@@ -31,12 +31,21 @@ except ImportError:
     add_constraints_b = None
 
 
-def build_model(data: dict, mode: str = "investment", eps: float | None = None):
+B_KEYS = ("PI", "R", "LEN", "L", "ACC", "M_KM")      # datos mínimos de la parte de B
+
+
+def build_model(data: dict, mode: str = "investment", eps: float | None = None,
+                include_b: bool | None = None):
     """Construye el MILP.
     mode = "operation"  -> apartado (a): sin inversión (u = 0, n = 0)
            "investment" -> apartado (b): inversión + operación
     eps  = límite de agua del método ε-restricción (None = solo la concesión W)
+    include_b = añadir la parte de B (objetivo, R3, R4, R8, R9). Por defecto,
+           sí cuando existe constraints_b.py y `data` trae sus datos (B_KEYS);
+           si no, el modelo queda sin objetivo (lo pone quien lo llama).
     """
+    if include_b is None:
+        include_b = add_constraints_b is not None and all(k in data for k in B_KEYS)
     m = pyo.ConcreteModel(name="Innivacion Sierra Nevada")
     m.data = data
 
@@ -72,7 +81,7 @@ def build_model(data: dict, mode: str = "investment", eps: float | None = None):
                 m.n[j, k].fix(0)
 
     add_constraints_a(m, data)
-    if add_constraints_b is not None:
+    if include_b:
         add_constraints_b(m, data)
     return m
 
