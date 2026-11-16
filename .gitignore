@@ -1,0 +1,4 @@
+# Se regeneran con los scripts
+results/
+__pycache__/
+*.pyc
