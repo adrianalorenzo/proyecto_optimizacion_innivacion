@@ -76,6 +76,8 @@ def main()-> None:
     for psi in BUDGETS:
         row, m = solve_case(dict(base, PSI=psi), "investment", args, f"PSI = {psi / 1e6:.2f} M€")
         rows.append(dict(row, PSI=psi))
+        OUT.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows).to_csv(OUT / "budget_sweep.csv", index=False)   # guarda lo que lleva
         if row["estado"] != "sin_solucion":
             detail += installed(m, base, psi)
 
