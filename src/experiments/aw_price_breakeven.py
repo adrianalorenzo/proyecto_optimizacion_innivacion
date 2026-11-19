@@ -52,6 +52,8 @@ def main():
                 row["n_AW"] = row["equipos_nuevos"]["AW"]
                 row["n_FAN"] = row["equipos_nuevos"]["FAN"]
             rows.append(row)
+            OUT.mkdir(parents=True, exist_ok=True)
+            pd.DataFrame(rows).to_csv(OUT / "aw_price_breakeven.csv", index=False)   #guarda lo que lleva hecho
             print(f" {scenario:13s} precio AW = {price:>9,} €  {status:10s} "
                   f"AW nuevos = {row.get('n_AW')}  beneficio_real = {row.get('beneficio_real')}")
 
