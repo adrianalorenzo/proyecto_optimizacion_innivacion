@@ -100,14 +100,14 @@ En el modo operación las variables de inversión `u` y `n` se fijan a 0.
 
 ## 5. Experimentos
 
-| Id | Script | Qué estudia | Salida en `results/experiments/` |
-|---|---|---|---|
-| S-A1 | `climate_runs.py --mode operation` | escenarios climáticos (qué limita: agua o frío) | `climate_operation.csv` |
-| S-A2 | `water_pareto.py` | frontera beneficio–agua (ε-restricción con `W_EPS`) | `water_pareto.csv`, `water_concession.csv`, `water_flow.csv` |
-| S-A3 | `sensitivity_physics.py` | sensibilidad a pérdidas, umbrales y supuestos físicos | `sensitivity_physics.csv`, `validation.csv` |
-| S-B1 | `budget_sweep.py` | barrido de presupuesto de inversión | `budget_sweep.csv`, `budget_sweep_detalle.csv` |
-| S-B2 | `aw_price_breakeven.py` | precio de equilibrio de la tecnología AW | `aw_price_breakeven.csv` |
-| — | `climate_runs.py --mode investment` | escenarios climáticos con inversión | `climate_investment.csv` |
+| Script | Qué estudia | Salida en `results/experiments/` |
+|---|---|---|
+| `climate_runs.py --mode operation` | escenarios climáticos (qué limita: agua o frío) | `climate_operation.csv` |
+| `water_pareto.py` | concesión, caudal y frontera beneficio–agua (ε-restricción con `W_EPS`) | `water_pareto.csv`, `water_concession.csv`, `water_flow.csv` |
+| `sensitivity_physics.py` | validación y sensibilidad a pérdidas, umbrales y supuestos físicos | `sensitivity_physics.csv`, `validation.csv` |
+| `budget_sweep.py` | barrido de presupuesto de inversión | `budget_sweep.csv`, `budget_sweep_detalle.csv` |
+| `aw_price_breakeven.py` | precio de equilibrio de la tecnología AW | `aw_price_breakeven.csv` |
+| `climate_runs.py --mode investment` | escenarios climáticos con inversión | `climate_investment.csv` |
 
 Todos los scripts están en `src/experiments/` y aceptan `--solver`, `--gap`, `--time-limit`
 y `--relax-x`.

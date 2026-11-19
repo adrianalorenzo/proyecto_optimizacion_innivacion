@@ -1,5 +1,5 @@
 """
-common.py  —  Utilidades compartidas por los experimentos de la Persona A.
+common.py  —  Utilidades compartidas por los experimentos.
 
 - Añade src/ al path para poder importar model, solve, etc.
 - Regenera en memoria (sin tocar los ficheros) los datos de un escenario

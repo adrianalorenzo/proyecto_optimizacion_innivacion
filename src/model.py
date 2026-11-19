@@ -1,23 +1,21 @@
 """
-model.py  —  Esqueleto COMÚN del MILP (Persona A + Persona B).
+model.py  —  Conjuntos y variables del MILP.
 
-Aquí solo hay conjuntos y variables (sección 3 del plan). Las restricciones y
-la función objetivo están en dos ficheros, para que cada una edite el suyo
-sin pisarse en git:
-    constraints_a.py  (Persona A)  R1, R2, R5, R6, R7
-    constraints_b.py  (Persona B)  función objetivo, R3, R4, R8, R9
+Las restricciones y la función objetivo están en dos ficheros:
+    constraints_a.py   R1, R2, R5, R6, R7              (nieve, agua y energía)
+    constraints_b.py   función objetivo, R3, R4, R8, R9 (estación e inversión)
 
 Notación: parámetros en MAYÚSCULAS, variables en minúsculas (igual que el
 informe). Los parámetros se leen directamente del diccionario `data`.
 
-Diccionario `data` (lo construye load_data.py, tarea B9). Claves:
+Diccionario `data` (lo construye load_data.py). Claves:
   Conjuntos:   P, J, JE, JN, K, D, DC, T,
                Td  {d: [t...]}  bloques de cada día
                Jp  {p: [j...]}  posiciones de cada sector
                ACC [(p, a)...]  conexiones: p necesita a abierta
-  Persona A:   G, A, E  {(j,k,t)},  PHI {k},  DELTA, Z {(p,d)},  S0 {p},
+  Nieve/agua:  G, A, E  {(j,k,t)},  PHI {k},  DELTA, Z {(p,d)},  S0 {p},
                B_MAX, B0, W, Q_MAX, E_MAX (escalares),  I {d}
-  Persona B:   PI {t}, R {(p,d)}, V {p}, LEN {p}, L {d}, M_KM,
+  Estación:    PI {t}, R {(p,d)}, V {p}, LEN {p}, L {d}, M_KM,
                N0 {(j,k)}, U {j}, F {j}, C {k}, FA {j}, CA {k}, PSI
 """
 
@@ -25,13 +23,13 @@ import pyomo.environ as pyo
 
 from constraints_a import add_constraints_a
 
-try:                                    # lo escribe la Persona B
+try:                                    # objetivo, R3, R4, R8, R9
     from constraints_b import add_constraints_b
 except ImportError:
     add_constraints_b = None
 
 
-B_KEYS = ("PI", "R", "LEN", "L", "ACC", "M_KM")      # datos mínimos de la parte de B
+B_KEYS = ("PI", "R", "LEN", "L", "ACC", "M_KM")      # datos mínimos para el objetivo y R3/R4
 
 
 def build_model(data: dict, mode: str = "investment", eps: float | None = None,
@@ -70,7 +68,7 @@ def build_model(data: dict, mode: str = "investment", eps: float | None = None,
     m.h = pyo.Var(m.DC, domain=pyo.NonNegativeReals)               # km incumplidos
 
     # Límite de agua del ε-restricción: parámetro mutable para poder cambiarlo
-    # sin reconstruir el modelo (frontera de Pareto, análisis S-A2)
+    # sin reconstruir el modelo (frontera de Pareto, water_pareto.py)
     m.W_EPS = pyo.Param(mutable=True, initialize=data["W"] if eps is None else min(eps, data["W"]))
 
     # Modo (a): sin inversión

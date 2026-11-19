@@ -1,13 +1,13 @@
 """
-test_model_a.py  —  Persona A: prueba de las restricciones R1, R2, R5, R6, R7
-SIN la parte de Adri (función objetivo, R3, R4, R8, R9).
+test_model_a.py  —  Prueba de las restricciones R1, R2, R5, R6, R7 por separado
+(sin la función objetivo ni R3, R4, R8, R9).
 
 Objetivo PROVISIONAL (solo para probar):
     max  Σ_p s_{p, 6 dic}  -  LAMBDA · coste eléctrico
 "¿Cuánta nieve puede tener la estación en pista el 6 de diciembre?" — con una
 pequeña penalización del coste para que elija las horas baratas.
 
-Datos PROVISIONALES de Adri que aún no existen:
+Datos de prueba (solo se usan en este fichero):
     PI_t  precio de la luz: 0,08 €/kWh de 0 a 6 h, 0,20 de 18 a 21 h, 0,15 el resto
     Z     si pistas.csv no tiene area_m2 -> 0 (sin nieve natural)
     S0    si la columna está vacía -> 0
@@ -75,7 +75,7 @@ def load_test_data(scenario: str) -> dict:
         "I": dict(zip(inflow["d"], inflow["I"])),
         "N0": {**{(r.j, "FAN"): r.N0_FAN for r in pos.itertuples()},
                **{(r.j, "AW"): r.N0_AW for r in pos.itertuples()}},
-        "PI": PI,                                            # PROVISIONAL
+        "PI": PI,                                            # de prueba
         "V": dict(zip(pistas["p"], pistas["V"])),
     }
     return data

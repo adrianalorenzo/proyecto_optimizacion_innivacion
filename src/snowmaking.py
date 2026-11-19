@@ -5,8 +5,8 @@ Todo lo que el modelo necesita de cada equipo sale de aquí:
     E_{j,k,t}  energía por equipo y bloque (kWh)  = KWH_PER_M3[k] * G_{j,k,t}
     PHI        agua por m³ de nieve
 
-Fuentes (citar en el informe)
------------------------------
+Fuentes
+-------
 FAN (cañón de ventilador):
   - Curva de producción aproximada a partir de las fichas de Bachler SnoTek:
     ~21 m³/h a -1,5 °C de bulbo húmedo, ~35 m³/h a -3 °C, ~67 m³/h a -5 °C

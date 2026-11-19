@@ -1,6 +1,5 @@
 """
-sensitivity_physics.py  —  Persona A, análisis S-A3: validación y sensibilidad
-a los supuestos físicos.
+sensitivity_physics.py  —  Validación y sensibilidad a los supuestos físicos.
 
 Se cambia UN supuesto cada vez (el resto en su valor base), se regeneran en
 memoria los datos que dependen de él y se vuelve a resolver:

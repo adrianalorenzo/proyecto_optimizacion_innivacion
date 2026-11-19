@@ -1,5 +1,5 @@
 """
-solve.py  —  Persona A, tarea A8: resolver el modelo y guardar resultados.
+solve.py  —  Resolver el modelo y guardar resultados.
 
 1. Construye el modelo (model.py) para un escenario y un modo.
 2. Lo resuelve con Gurobi (o HiGHS si no hay Gurobi) y mide tiempos, gap y
@@ -9,11 +9,11 @@ solve.py  —  Persona A, tarea A8: resolver el modelo y guardar resultados.
 
 La función solve_scenario() es la que usan los experimentos (src/experiments/).
 
-Plan de escalado (sección 3.5 del plan, comentario C4 del profesor):
+Opciones para reducir el tamaño del problema:
   --days N      solo los N primeros días del horizonte
   --relax-x     x continua en vez de entera
 
-Datos: load_data.py (tarea B9) si existe; si no, el cargador de prueba de
+Datos: load_data.py si existe; si no, el cargador de prueba de
 test_model_a.py. Objetivo: el de constraints_b.py si hay datos para él; si no,
 el objetivo de prueba (máxima nieve el 6 de diciembre) y avisa.
 
@@ -42,7 +42,7 @@ RESULTS = ROOT / "results"
 # ----------------------------------------------------------------------------
 def load(scenario: str, quiet: bool = False) -> dict:
     try:
-        from load_data import load_data            # tarea B9 (Persona B)
+        from load_data import load_data
         return load_data(scenario)
     except ImportError:
         from test_model_a import load_test_data
@@ -147,7 +147,7 @@ def kpis(m, data) -> dict:
     out["bloques_caudal_max"] = sum(water_used(m, data, t) > 0.99 * data["Q_MAX"] for t in m.T)
     out["nieve_producida_m3"] = sum(data["G"][j, k, t] * (v(m.x[j, k, t]) or 0)
                                     for j in m.J for k in m.K for t in m.T)
-    if "LEN" in data and hasattr(m, "R3a"):        # solo con la parte de B
+    if "LEN" in data and hasattr(m, "R3a"):        # solo si existen R3a/R4 (constraints_b)
         y = {(p, d): round(m.y[p, d].value or 0) for p in m.P for d in m.D}
         out["sector_dias_abiertos"] = sum(y.values())
         out["km_dia_medio"] = sum(data["LEN"][p] * y[p, d] for p, d in y) / len(m.D)

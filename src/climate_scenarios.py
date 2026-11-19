@@ -20,7 +20,7 @@ Sobre la temporada NORMAL se suma +1 °C y +2 °C a todas las horas:
   convierte en lluvia (umbral de fase de 0 °C, el más usado en la literatura).
 - El umbral de viento es el mismo de las 10 temporadas (no cambia con la T).
 Es un "delta change" sencillo: no cambia la frecuencia de temporales ni la
-humedad, solo desplaza la temperatura. Limitación a comentar en el informe.
+humedad, solo desplaza la temperatura (limitación).
 
 Salidas: data/processed/scenarios/<escenario>/production.csv y snow.csv para
     fria, normal, calida, normal_plus1, normal_plus2

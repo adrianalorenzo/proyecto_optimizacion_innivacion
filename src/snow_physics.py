@@ -19,19 +19,18 @@ dividiendo entre el agua equivalente de un manto de referencia:
 Por qué proporcional y no absoluta: es lineal y SIEMPRE factible (una pérdida
 absoluta fija podría pedir más nieve de la que hay y hacer el modelo
 infactible). Precio: sobrestima la pérdida en mantos gruesos y la subestima en
-mantos finos. Es un supuesto a discutir en el informe.
+mantos finos.
 
 2) Nieve natural
 ----------------
 Open-Meteo da la nieve caída en cm de nieve fresca (0,7 cm por mm de agua).
 Se pasa a agua equivalente y luego a m³ de nieve pisada (densidad 450 kg/m³)
-sobre la superficie del sector (area_m2 de pistas.csv; si aún no existe, Z
-queda vacío).
+sobre la superficie del sector (area_m2 de pistas.csv).
 
 3) Nieve inicial
 ----------------
-S0_p = 0: el 15 de noviembre se supone que no hay base de nieve en pista.
-Se escribe a mano en la columna S0 de pistas.csv (fichero compartido con B).
+S0_p = 0: el 15 de noviembre se supone que no hay base de nieve.
+Está en la columna S0 de pistas.csv (la lee load_data.py).
 
 Fuentes
 -------
@@ -54,10 +53,9 @@ RAW_DIR = ROOT / "data" / "raw" / "weather"
 SCEN_DIR = ROOT / "data" / "processed" / "scenarios"
 PISTAS_FILE = ROOT / "data" / "processed" / "pistas.csv"
 POSITIONS_FILE = ROOT / "data" / "processed" / "positions.csv"
-POSITIONS_PROVISIONAL = ROOT / "data" / "interim" / "positions_provisional.csv"
 
 # ----------------------------------------------------------------------------
-# Parámetros (supuestos documentados -> sensibilidad en S-A3)
+# Parámetros (supuestos; sensibilidad en sensitivity_physics.py)
 # ----------------------------------------------------------------------------
 REF_ELEVATION_M = 2500
 LAPSE_RATE = -0.65 / 100        # °C / m
@@ -72,8 +70,7 @@ CM_SNOW_PER_MM_WATER = 0.7      # conversión que usa Open-Meteo para "snowfall"
 
 def sector_altitudes() -> pd.Series:
     """Cota de cada sector p = media de las cotas de sus posiciones."""
-    path = POSITIONS_FILE if POSITIONS_FILE.exists() else POSITIONS_PROVISIONAL
-    pos = pd.read_csv(path)
+    pos = pd.read_csv(POSITIONS_FILE)
     return pos.groupby("p")["altitude_m"].mean()
 
 

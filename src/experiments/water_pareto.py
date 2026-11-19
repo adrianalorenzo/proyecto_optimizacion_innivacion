@@ -1,5 +1,5 @@
 """
-water_pareto.py  —  Persona A, análisis S-A2: el agua.
+water_pareto.py  —  Análisis del agua.
 
 Tres preguntas:
 1. CONCESIÓN: ¿qué pasa si la CHG reduce la concesión (-20 %, -40 %) o si

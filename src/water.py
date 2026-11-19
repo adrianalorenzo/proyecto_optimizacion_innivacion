@@ -5,8 +5,6 @@ Genera los parámetros de las restricciones R5 (balsa), R6 (concesión) y R7
     data/processed/water_energy.yaml   B_MAX, B0, W, Q_MAX, E_MAX, PHI_FAN, PHI_AW
     data/processed/inflow.csv          d, I     (aporte diario a la balsa, m³)
 
-Están en ficheros propios (no en scalars.yaml) para no editar ficheros de B.
-
 Fuentes
 -------
 - Concesión de la CHG: 350.000 m³/año del río Monachil para producir nieve,
@@ -25,10 +23,10 @@ Fuentes
   así que la red de distribución es mayor que la captación. Supuesto: el
   doble de la captación medida (2 x 5.000 m³/día ≈ 116 l/s), del orden de lo
   que transporta una tubería DN250 (la de la red de nieve de Cetursa) a
-  ~2,4 m/s (≈ 118 l/s). Sensibilidad en S-A2.
+  ~2,4 m/s (≈ 118 l/s). Sensibilidad en water_pareto.py.
 
 Supuestos
----------------------------------------
+---------
 - OMEGA: fracción de la concesión anual que se gasta en el horizonte
   (15 nov - 6 ene). La producción se concentra al principio de temporada
   (hasta mediados de diciembre se fabrica la base) -> 0,7.
@@ -58,7 +56,7 @@ B_MAX = 2 * 100_000             # m³, dos balsas de 100.000 m³ (memoria técni
 B0 = B_MAX                      # balsas llenas al inicio (supuesto)
 CONCESSION_FLOW_LS = 65         # l/s, caudal concesional (BOE) -> entrada máxima I_d
 DAILY_INTAKE_MEASURED = 5_000   # m³/día que se captan (CCOO, 2022) ≈ 58 l/s
-DISTRIBUTION_FACTOR = 2.0       # red de distribución = 2 x captación (supuesto, S-A2)
+DISTRIBUTION_FACTOR = 2.0       # red de distribución = 2 x captación (supuesto, ver water_pareto.py)
 POWER_MAX_KW = 10_000           # potencia máxima disponible (supuesto, holgado)
 
 
@@ -73,7 +71,7 @@ def main() -> None:
         "PHI_AW": round(PHI["AW"], 4),
     }
     with open(OUT / "water_energy.yaml", "w", encoding="utf-8") as f:
-        f.write("# Parámetros de agua y energía (Persona A, src/water.py)\n")
+        f.write("# Parámetros de agua y energía (src/water.py)\n")
         for k, v in params.items():
             f.write(f"{k}: {v}\n")
 

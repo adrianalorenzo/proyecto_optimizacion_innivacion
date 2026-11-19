@@ -6,19 +6,17 @@ humedad relativa, el viento y la nieve caída, hora a hora, en Sierra Nevada,
 para el horizonte del modelo (15 nov – 6 ene) de las temporadas 2015/16 a 2024/25.
 Guarda un CSV por temporada en data/raw/weather/.
 
-Decisiones (hay que justificarlas en el informe, apartado de datos)
--------------------------------------------------------------------
+Decisiones
+----------
 - Un único punto de referencia (Pradollano, 37.09 N, -3.40 E) a una COTA DE
   REFERENCIA de 2500 m. Open-Meteo corrige la temperatura a la cota que le
-  pidamos. Después (tarea A2) pasaremos de esta cota a la de cada posición j
-  con el gradiente de -0,65 °C / 100 m. Así no hace falta esperar a tener las
-  cotas de positions.csv para descargar.
+  pidamos. Después (process_weather.py) se pasa de esta cota a la de cada
+  posición j con el gradiente de -0,65 °C / 100 m.
 - ERA5 tiene una resolución de unos 25 km: no distingue unas pistas de otras.
   Por eso las diferencias entre posiciones salen solo de la cota (gradiente)
-  y del factor de exposición al viento. Esto es un SUPUESTO que hay que
-  explicar.
+  y del factor de exposición al viento (supuesto).
 - Hora local (Europe/Madrid), porque el precio de la electricidad y los
-  bloques de 3 h van en hora local.1.
+  bloques de 3 h van en hora local.
 """
 
 from pathlib import Path

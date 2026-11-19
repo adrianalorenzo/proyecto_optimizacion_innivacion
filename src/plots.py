@@ -4,10 +4,10 @@ Lee los CSV que generan solve.py y los experimentos; no resuelve nada.
   fig_snow_heatmap      nieve en cada sector y día / nieve mínima V (s/V)
   fig_reservoir         agua en la balsa a lo largo del horizonte
   fig_water_by_hour     % del agua usada en cada bloque de 3 h del día
-  fig_pareto            frontera beneficio (objetivo) frente a agua (S-A2)
-  fig_flow              objetivo frente al caudal máximo Q_MAX (S-A2)
-  fig_climate           objetivo en cada escenario climático (S-A1)
-  fig_sensitivity       gráfico "tornado" de los supuestos físicos (S-A3)
+  fig_pareto            frontera beneficio (objetivo) frente a agua (water_pareto.py)
+  fig_flow              objetivo frente al caudal máximo Q_MAX (water_pareto.py)
+  fig_climate           objetivo en cada escenario climático (climate_runs.py)
+  fig_sensitivity       gráfico "tornado" de los supuestos físicos (sensitivity_physics.py)
 
 Uso:  python src/plots.py                    (usa results/normal_operation)
       python src/plots.py --run calida_operation

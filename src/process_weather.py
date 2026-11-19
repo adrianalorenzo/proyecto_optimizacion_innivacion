@@ -21,15 +21,15 @@ Pasos
    G_{j,k,t} = suma de la producción de las horas aptas del bloque (0 si A = 0)
    E_{j,k,t} = KWH_PER_M3[k] * G_{j,k,t}
 
-Salidas (data/interim/, ficheros intermedios para la tarea A3)
----------------------------------------------------------------
+Salidas intermedias (data/interim/)
+-----------------------------------
 - periods.csv         t, d, block, date (MM-DD), hour_start      (común a todas las temporadas)
 - weather_blocks.csv  season, j, t, T, Tw, Tw_min, n_apt_FAN, n_apt_AW, A_FAN, A_AW
 - snowfall_days.csv   season, d, snowfall_cm   (nieve natural a la cota de referencia)
 
 Salida para el modelo (data/processed/scenarios/<temporada>/)
 -------------------------------------------------------------
-- production.csv      j, k, t, A, G, E     (formato de la sección 5 del plan)
+- production.csv      j, k, t, A, G, E
 """
 
 from pathlib import Path
@@ -44,12 +44,10 @@ RAW_DIR = ROOT / "data" / "raw" / "weather"
 OUT_DIR = ROOT / "data" / "interim"
 SCEN_DIR = ROOT / "data" / "processed" / "scenarios"
 
-# Fichero de posiciones: el de Adri cuando exista; si no, el provisional.
 POSITIONS_FILE = ROOT / "data" / "processed" / "positions.csv"
-POSITIONS_PROVISIONAL = ROOT / "data" / "interim" / "positions_provisional.csv"
 
 # ----------------------------------------------------------------------------
-# Parámetros (todos son supuestos documentados -> candidatos a sensibilidad)
+# Parámetros (supuestos; su sensibilidad está en sensitivity_physics.py)
 # ----------------------------------------------------------------------------
 REF_ELEVATION_M = 2500
 LAPSE_RATE = -0.65 / 100          # °C por metro
@@ -90,7 +88,7 @@ def add_time_indices(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def load_positions() -> pd.DataFrame:
-    path = POSITIONS_FILE if POSITIONS_FILE.exists() else POSITIONS_PROVISIONAL
+    path = POSITIONS_FILE
     print(f"Posiciones leídas de: {path.relative_to(ROOT)}")
     pos = pd.read_csv(path)
     return pos[["j", "altitude_m", "exposure"]].astype({"exposure": float})
