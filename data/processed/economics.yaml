@@ -2,5 +2,5 @@
 PSI: 3000000 #presupuesto de inversion (coste total en euros)
 r: 0.05 #tasa de descuento anual
 theta: 0.23 #fraccion de la temporada que cae en el horizonte (203.000 / 896.241 esquiadores)
-M_KM: 15000 #euros/km de compromiso incumplido en un día clave
+M_KM: 5000 #euros/km de compromiso incumplido en un día clave (aprox. lo que genera 1 km un día clave)
 life_positions: 30 #año de vida de la red (tuberías, arquetas, cableado)
