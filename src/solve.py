@@ -139,6 +139,8 @@ def kpis(m, data) -> dict:
     for name in ["REVENUE", "ELECTRICITY", "INVESTMENT", "PENALTY"]:
         if hasattr(m, name):
             out[name.lower()] = v(getattr(m, name))
+    if "revenue" in out:     # beneficio "de verdad": sin la penalización (que es un recurso del modelo)
+        out["beneficio_real"] = out["revenue"] - out.get("electricity", 0) - out.get("investment", 0)
     used = water_used(m, data)
     out["agua_usada_m3"] = used
     out["agua_pct_W"] = 100 * used / data["W"]

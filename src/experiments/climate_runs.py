@@ -31,12 +31,13 @@ def main() -> None:
     ap.add_argument("--solver", default=None)
     ap.add_argument("--gap", type=float, default=0.01)
     ap.add_argument("--time-limit", type=int, default=600)
+    ap.add_argument("--relax-x", action="store_true", help="x continua (análisis largos)")
     args = ap.parse_args()
 
     rows = []
     for sc in SCENARIOS:
         summary, _, _ = solve_scenario(sc, args.mode, solver=args.solver, gap=args.gap,
-                                       time_limit=args.time_limit, quiet=True)
+                                       time_limit=args.time_limit, relax_x=args.relax_x, quiet=True)
         rows.append(summary)
         print(f"  {sc:13s} {summary['estado']:10s} obj={summary.get('objetivo')} "
               f"agua={summary.get('agua_usada_m3')} t={summary['t_resolucion_s']} s")

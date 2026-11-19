@@ -33,9 +33,9 @@ DATA_A = ["weather.py", "process_weather.py", "snow_physics.py",
 DATA_B = ["economics.py", "prices.py"]
 BASE_CASES = [["--scenario", "normal", "--mode", "operation"],
               ["--scenario", "normal", "--mode", "investment"]]
-EXPERIMENTS_A = [["climate_runs.py", "--mode", "operation"],
-                 ["water_pareto.py", "--scenario", "normal"],
-                 ["sensitivity_physics.py", "--scenario", "normal"]]
+EXPERIMENTS_A = [["climate_runs.py", "--mode", "operation", "--relax-x"],
+                 ["water_pareto.py", "--scenario", "normal", "--relax-x"],
+                 ["sensitivity_physics.py", "--scenario", "normal", "--relax-x"]]
 EXPERIMENTS_B = [["climate_runs.py", "--mode", "investment"]]   # + los de B
 
 

@@ -68,7 +68,7 @@ def scale_fan(data, f):
 
 
 def solve(data, args):
-    m = prepare(data, "operation", quiet=True)
+    m = prepare(data, "operation", relax_x=args.relax_x, quiet=True)
     status, gap, secs, _ = run_solver(m, args.solver, args.gap, args.time_limit, quiet=True)
     out = {"estado": status, "gap": gap, "t_s": round(secs, 1)}
     if status != "sin_solucion":
@@ -82,6 +82,7 @@ def main() -> None:
     ap.add_argument("--solver", default=None)
     ap.add_argument("--gap", type=float, default=0.01)
     ap.add_argument("--time-limit", type=int, default=300)
+    ap.add_argument("--relax-x", action="store_true", help="x continua (análisis largos)")
     args = ap.parse_args()
     sc = args.scenario
     base = quiet_load(sc)

@@ -30,12 +30,12 @@ ANNUAL_CONCESSION = 350_000
 REQUESTED_CONCESSION = 725_749          # BOE-B-2023-35624
 CONCESSION_CASES = {"-40 %": 0.6, "-20 %": 0.8, "actual": 1.0,
                     "ampliación pedida": REQUESTED_CONCESSION / ANNUAL_CONCESSION}
-FLOW_CASES = [0.75, 1.0, 1.25, 1.5, 2.0]
+FLOW_CASES = [0.5, 0.75, 1.0, 1.5]     # x Q_MAX base (0,5 = el antiguo dato de CCOO)
 EPS_FRACTIONS = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]
 
 
 def solve_case(data, args, mode="operation", label=None):
-    m = prepare(data, mode, quiet=True)
+    m = prepare(data, mode, relax_x=args.relax_x, quiet=True)
     status, gap, secs, _ = run_solver(m, args.solver, args.gap, args.time_limit, quiet=True)
     row = {"caso": label, "estado": status, "gap": gap, "t_s": round(secs, 1)}
     if status != "sin_solucion":
@@ -50,6 +50,7 @@ def main() -> None:
     ap.add_argument("--solver", default=None)
     ap.add_argument("--gap", type=float, default=0.01)
     ap.add_argument("--time-limit", type=int, default=300)
+    ap.add_argument("--relax-x", action="store_true", help="x continua (análisis largos)")
     args = ap.parse_args()
     base = quiet_load(args.scenario)
 

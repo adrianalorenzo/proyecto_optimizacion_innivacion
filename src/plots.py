@@ -47,6 +47,13 @@ plt.rcParams.update({
 })
 
 
+def metric(t):
+    """Columna a dibujar: el beneficio real (sin penalización) si existe; si no, el objetivo."""
+    if "beneficio_real" in t.columns:
+        return "beneficio_real", "beneficio (€, sin penalización)"
+    return "objetivo", "valor del objetivo"
+
+
 def save(fig, name):
     FIG.mkdir(parents=True, exist_ok=True)
     fig.tight_layout()
@@ -118,16 +125,17 @@ def pareto():
     if not path.exists():
         return
     t = pd.read_csv(path).sort_values("agua_usada_m3")
+    col, label = metric(t)
     fig, ax = plt.subplots(figsize=(7, 4))
-    ax.plot(t["agua_usada_m3"], t["objetivo"], color=BLUE, marker="o", markersize=6)
-    for r in t.itertuples():
-        ax.annotate(f"{r.eps_frac:.0%}", (r.agua_usada_m3, r.objetivo), textcoords="offset points",
+    ax.plot(t["agua_usada_m3"], t[col], color=BLUE, marker="o", markersize=6)
+    for frac, w, val in zip(t["eps_frac"], t["agua_usada_m3"], t[col]):
+        ax.annotate(f"{frac:.0%}", (w, val), textcoords="offset points",
                     xytext=(6, -12), fontsize=8, color=INK2)
     ax.set_xlabel("agua usada en el horizonte (m³)")
-    ax.set_ylabel("valor del objetivo")
+    ax.set_ylabel(label)
     fmt_thousands(ax)
     fmt_thousands(ax, "x")
-    ax.set_title("Frontera de Pareto: objetivo frente a agua (ε = % del agua sin límite)")
+    ax.set_title("Frontera de Pareto: beneficio frente a agua (ε = % del agua sin límite)")
     save(fig, "fig_pareto")
 
 
@@ -136,20 +144,22 @@ def flow():
     if not path.exists():
         return
     t = pd.read_csv(path)
+    col, label = metric(t)
     fig, ax = plt.subplots(figsize=(7, 3.6))
-    ax.plot(t["factor_Q"] * 100, t["objetivo"], color=BLUE, marker="o", markersize=6)
-    ax.set_xlabel("caudal máximo (% del actual: 5.000 m³/día)")
-    ax.set_ylabel("valor del objetivo")
+    ax.plot(t["factor_Q"] * 100, t[col], color=BLUE, marker="o", markersize=6)
+    ax.set_xlabel("caudal de distribución (% del caso base: 1.250 m³ por bloque)")
+    ax.set_ylabel(label)
     fmt_thousands(ax)
     conc = EXP / "water_concession.csv"
     if conc.exists():
         c = pd.read_csv(conc)
-        spread = 100 * (c["objetivo"].max() / c["objetivo"].min() - 1)
+        cc, _ = metric(c)
+        spread = 100 * abs(c[cc].max() / c[cc].min() - 1)
         msg = ("Recortar la concesión un 40 % o doblarla no cambia el objetivo"
                if spread < 0.5 else
                f"Recortar la concesión un 40 % o doblarla cambia el objetivo un {spread:.1f} %")
         ax.text(0.02, 0.95, msg, transform=ax.transAxes, color=INK2, fontsize=8, va="top")
-    ax.set_title("El caudal limita más que la concesión")
+    ax.set_title("Efecto del caudal de distribución")
     save(fig, "fig_flow")
 
 
@@ -161,12 +171,13 @@ def climate():
         t = pd.read_csv(path)
         labels = {"fria": "Fría\n2020/21", "normal": "Normal\n2019/20", "calida": "Cálida\n2022/23",
                   "normal_plus1": "Normal\n+1 °C", "normal_plus2": "Normal\n+2 °C"}
+        col, label = metric(t)
         fig, ax = plt.subplots(figsize=(7, 3.6))
-        bars = ax.bar([labels.get(e, e) for e in t["escenario"]], t["objetivo"], color=BLUE, width=0.6)
-        for b, v in zip(bars, t["objetivo"]):
+        bars = ax.bar([labels.get(e, e) for e in t["escenario"]], t[col], color=BLUE, width=0.6)
+        for b, v in zip(bars, t[col]):
             ax.text(b.get_x() + b.get_width() / 2, v, f"{v:,.0f}".replace(",", "."),
                     ha="center", va="bottom", fontsize=8, color=INK2)
-        ax.set_ylabel("valor del objetivo")
+        ax.set_ylabel(label)
         fmt_thousands(ax)
         ax.grid(axis="x", visible=False)
         ax.set_title(f"Escenarios climáticos ({mode})")
