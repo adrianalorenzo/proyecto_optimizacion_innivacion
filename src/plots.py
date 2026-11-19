@@ -81,7 +81,7 @@ def snow_heatmap(run: Path, run_name: str):
     cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.01)
     cb.set_label("nieve / nieve mínima para abrir (s/V)", color=INK2)
     cb.outline.set_visible(False)
-    ax.set_title(f"Nieve en pista por sector ({run_name}) — a partir de 1 se puede abrir")
+    ax.set_title(f"Nieve acumulada por sector ({run_name}) — a partir de 1 se puede abrir")
     save(fig, f"fig_snow_heatmap_{run_name}")
 
 
@@ -178,7 +178,7 @@ def climate():
         ax.set_ylabel(label)
         fmt_thousands(ax)
         ax.grid(axis="x", visible=False)
-        ax.set_title(f"Escenarios climáticos ({mode})")
+        ax.set_title("Escenarios climáticos (" + {"operation": "operación", "investment": "inversión"}.get(mode, mode) + ")")
         save(fig, f"fig_climate_{mode}")
 
 
@@ -187,6 +187,9 @@ def sensitivity():
     if not path.exists():
         return
     t = pd.read_csv(path)
+    if "beneficio_real" in t.columns:          # variación del beneficio real (sin penalización)
+        base = t.loc[t["supuesto"].str.startswith("DDF") & (t["valor"] == 4.0), "beneficio_real"].iloc[0]
+        t["var_obj_pct"] = (100 * (t["beneficio_real"] / base - 1)).round(1)
     g = t.groupby("supuesto")
     lo = g.apply(lambda d: d.loc[d["valor"].idxmin()], include_groups=False)
     hi = g.apply(lambda d: d.loc[d["valor"].idxmax()], include_groups=False)
@@ -204,7 +207,7 @@ def sensitivity():
     ax.set_xlim(-lim, lim)
     ax.set_yticks(y, span.index)
     ax.axvline(0, color=INK2, linewidth=1)
-    ax.set_xlabel("cambio del objetivo respecto al caso base (%)")
+    ax.set_xlabel("cambio del beneficio respecto al caso base (%)")
     ax.grid(axis="y", visible=False)
     ax.legend(frameon=False, loc="lower right", fontsize=8)
     ax.set_title("¿Qué supuesto físico importa más?")

@@ -103,6 +103,8 @@ def main() -> None:
     table = pd.DataFrame(rows)
     base_obj, _ = solve(base, args)
     table["var_obj_pct"] = (100 * (table["objetivo"] / base_obj["objetivo"] - 1)).round(1)
+    if "beneficio_real" in table.columns:     # variación del beneficio sin penalización
+        table["var_benef_pct"] = (100 * (table["beneficio_real"] / base_obj["beneficio_real"] - 1)).round(1)
     save_table(table, "sensitivity_physics")
 
     # ------------------------------ Validación ------------------------------
