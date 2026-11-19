@@ -1,6 +1,4 @@
 """
-plots.py  —  Persona A: figuras para el informe (PNG en results/figures/).
-
 Lee los CSV que generan solve.py y los experimentos; no resuelve nada.
 
   fig_snow_heatmap      nieve en cada sector y día / nieve mínima V (s/V)

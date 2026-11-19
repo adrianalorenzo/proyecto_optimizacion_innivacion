@@ -95,7 +95,6 @@ def snow_for_season(df: pd.DataFrame, alt: pd.Series, area: pd.Series | None) ->
         pdd = np.maximum(T.groupby(df["d"]).mean() - T_MELT, 0)        # °C·día
         loss_mm = DDF * pdd + SUBL
         delta = (loss_mm / SWE_REF).clip(upper=1.0)
-
         snow_cm = df.groupby("d")["snowfall"].sum()
         if area is not None:
             swe_m = snow_cm / CM_SNOW_PER_MM_WATER / 1000            # m de agua

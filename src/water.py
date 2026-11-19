@@ -1,6 +1,4 @@
 """
-water.py  —  Persona A, tarea A5: datos de agua y energía.
-
 Genera los parámetros de las restricciones R5 (balsa), R6 (concesión) y R7
 (caudal y energía máximos por bloque):
 
@@ -29,7 +27,7 @@ Fuentes
   que transporta una tubería DN250 (la de la red de nieve de Cetursa) a
   ~2,4 m/s (≈ 118 l/s). Sensibilidad en S-A2.
 
-Supuestos (sensibilidad en S-A2 / S-A3)
+Supuestos
 ---------------------------------------
 - OMEGA: fracción de la concesión anual que se gasta en el horizonte
   (15 nov - 6 ene). La producción se concentra al principio de temporada
