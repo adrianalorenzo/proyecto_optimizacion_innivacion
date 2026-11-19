@@ -1,5 +1,5 @@
 """
-B4: ingresos R_{p,d} (revenue.csv) y días clase con km mínimos L_d
+ingresos R_{p,d} (revenue.csv) y días clase con km mínimos L_d
 
 Idea. R_{p,d} = N_d* PRECIO_d * FACTOR_INGRESO * peso_p
 
