@@ -9,9 +9,9 @@ Orden:
   1. Datos (Persona A): weather -> process_weather -> snow_physics ->
      climate_scenarios -> water
   2. Datos (Persona B): economics, prices  (si existen)
-  3. Casos base: normal en modo operación e inversión  (src/solve.py)
-  4. Experimentos: S-A1 climate_runs, S-A2 water_pareto, S-A3 sensitivity_physics
-     (+ los de la Persona B en src/experiments/ cuando existan)
+  3. Casos base: normal en modo operación (x entera y continua) e inversión
+  4. Experimentos: S-A1 climate_runs, S-A2 water_pareto, S-A3 sensitivity_physics,
+     S-B1 budget_sweep, S-B2 aw_price_breakeven y clima en modo inversión
   5. Figuras (src/plots.py)
 
 La descarga del clima (weather.py) solo baja lo que falta: los CSV de
@@ -31,12 +31,17 @@ PY = sys.executable
 DATA_A = ["weather.py", "process_weather.py", "snow_physics.py",
           "climate_scenarios.py", "water.py"]
 DATA_B = ["economics.py", "prices.py"]
-BASE_CASES = [["--scenario", "normal", "--mode", "operation"],
-              ["--scenario", "normal", "--mode", "investment"]]
+# Caso base de operación con x entera (resultado "oficial", Tabla de validación)
+# y con x continua (para la comparación); inversión con x continua.
+BASE_CASES = [["--scenario", "normal", "--mode", "operation", "--time-limit", "1200"],
+              ["--scenario", "normal", "--mode", "operation", "--relax-x"],
+              ["--scenario", "normal", "--mode", "investment", "--relax-x", "--time-limit", "1200"]]
 EXPERIMENTS_A = [["climate_runs.py", "--mode", "operation", "--relax-x"],
                  ["water_pareto.py", "--scenario", "normal", "--relax-x"],
                  ["sensitivity_physics.py", "--scenario", "normal", "--relax-x"]]
-EXPERIMENTS_B = [["climate_runs.py", "--mode", "investment"]]   # + los de B
+EXPERIMENTS_B = [["climate_runs.py", "--mode", "investment", "--relax-x"],
+                 ["budget_sweep.py", "--scenario", "normal", "--relax-x"],     # S-B1
+                 ["aw_price_breakeven.py", "--relax-x"]]                      # S-B2
 
 
 def run(script: Path, *args: str) -> None:
