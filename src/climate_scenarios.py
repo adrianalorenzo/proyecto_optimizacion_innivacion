@@ -1,6 +1,4 @@
 """
-climate_scenarios.py  —  Persona A, tarea A6: escenarios climáticos.
-
 1) Temporadas representativas (de las 10 descargadas)
 -----------------------------------------------------
 Criterio único: nieve que puede producir un cañón de ventilador en la
