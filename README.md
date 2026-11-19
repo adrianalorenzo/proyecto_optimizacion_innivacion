@@ -1,7 +1,7 @@
 # Innivación artificial en Sierra Nevada — MILP
 
 Proyecto final de **Optimización y Simulación** (GiMAT, Comillas ICAI).
-Autoras: Jimena (Persona A: clima, nieve y agua) y Adriana (Persona B: estación, economía e inversión).
+Autoras: Jimena y Adriana.
 
 Modelo de programación lineal entera mixta (Pyomo) que decide, en bloques de 3 horas
 durante una temporada (424 bloques), **cuándo y con qué cañones producir nieve** en cada
@@ -53,7 +53,7 @@ Los resultados se guardan en `results/<escenario>_<modo>[_relax]/` (CSV por vari
 ## 3. Flujo de datos
 
 ```
-Persona A (clima, nieve y agua)
+Clima, nieve y agua
   weather.py            ERA5 horario (Open-Meteo)              -> data/raw/weather/
   process_weather.py    cota, bulbo húmedo, viento, aptitud,
                         bloques de 3 h                         -> data/interim/weather_blocks.csv
@@ -64,7 +64,7 @@ Persona A (clima, nieve y agua)
                                                                -> data/processed/scenarios/
   water.py              concesión, balsas, Q_MAX, entrada diaria -> water_energy.yaml, inflow.csv
 
-Persona B (estación, economía e inversión)
+Estación, economía e inversión
   economics.py          pistas, posiciones, tecnologías, ingresos, días clave
                                                                -> pistas.csv, positions.csv, tech.csv,
                                                                   revenue.csv, keydays.csv, economics.yaml
@@ -134,11 +134,3 @@ src/experiments/  análisis de sensibilidad y escenarios
 results/          salidas (no versionado)
 run_all.py        reproduce todo
 ```
-
-## 8. Reparto
-
-- **Persona A (Jimena):** `weather.py`, `process_weather.py`, `snowmaking.py`,
-  `snow_physics.py`, `climate_scenarios.py`, `water.py`, `model.py`, `constraints_a.py`,
-  `solve.py`, `plots.py`, `run_all.py`, experimentos S-A1 a S-A3.
-- **Persona B (Adriana):** `economics.py`, `prices.py`, `load_data.py`,
-  `constraints_b.py`, experimentos S-B1 y S-B2.
