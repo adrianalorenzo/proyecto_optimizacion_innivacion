@@ -32,6 +32,7 @@ def main():
     ap.add_argument("--gap", type=float, default=0.01)
     ap.add_argument("--time-limit", type=int, default=600)
     ap.add_argument("--days", type=int, default=None, help="recortar el horizonte (pruebas)")
+    ap.add_argument("--relax-x", action="store_true", help="x continua (más rápido)")
     args = ap.parse_args()
 
     rows = []
@@ -42,7 +43,7 @@ def main():
 
         for price in PRICES:
             data = with_aw_price(base, price)
-            m = prepare(data, "investment", quiet=True)
+            m = prepare(data, "investment", relax_x=args.relax_x, quiet=True)
             status, gap, secs, _ = run_solver(m, args.solver, args.gap, args.time_limit, quiet=True)
             row = {"escenario": scenario, "precio_AW": price, "estado": status, "gap": gap,
                    "t_s": round(secs, 1)}
@@ -52,7 +53,7 @@ def main():
                 row["n_FAN"] = row["equipos_nuevos"]["FAN"]
             rows.append(row)
             print(f" {scenario:13s} precio AW = {price:>9,} €  {status:10s} "
-                  f"AW nuevos = {row.get('n_AW')}  beneficio = {row.get('objetivo')}")
+                  f"AW nuevos = {row.get('n_AW')}  beneficio_real = {row.get('beneficio_real')}")
 
     table = pd.DataFrame(rows)
     OUT.mkdir(parents=True, exist_ok=True)

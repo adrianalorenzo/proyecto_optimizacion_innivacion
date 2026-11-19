@@ -17,13 +17,13 @@ FIG = ROOT/ "results" / "figures"
 BUDGETS = [0,250_000,500_000, 1_000_000, 2_000_000, 3_000_000, 5_000_000, 8_000_000]
 
 def solve_case(data, mode, args, label):
-    m = prepare(data, mode, quiet=True)
+    m = prepare(data, mode, relax_x=args.relax_x, quiet=True)
     status, gap, secs, _ = run_solver(m, args.solver, args.gap, args.time_limit, quiet=True)
     row = {"caso": label, "modo":mode, "estado": status,
            "gap": None if gap is None else round(gap, 4), "t_s": round(secs, 1)}
     if status != "sin_solucion":
         row.update(kpis(m, data))
-    print(f" {label:16s} {status:12s} beneficio={row.get('objetivo')} " 
+    print(f" {label:16s} {status:12s} beneficio={row.get('beneficio_real')} km_incumplidos={row.get('km_incumplidos_total')} " 
           f"inversion={row.get('investment')} equipos={row.get('equipos_nuevos')}")
     return row, m 
 
@@ -44,10 +44,10 @@ def plot(table: pd.DataFrame, base_obj: float) -> Path:
     FIG.mkdir(parents=True, exist_ok=True)
     t = table[table["modo"] == "investment"]
     fig, ax = plt.subplots(figsize=(7,4))
-    ax.plot(t["PSI"]/ 1e6, t["objetivo"] /1e3, marker="o", label="(b) inversión + operación")
+    ax.plot(t["PSI"]/ 1e6, t["beneficio_real"] /1e3, marker="o", label="(b) inversión + operación")
     ax.axhline(base_obj/1e3, color="grey", ls="--", label="(a) solo operación")
     ax.set_xlabel("Presupuesto de inversión (millones de euros)")
-    ax.set_ylabel("Beneficio en el horizonte (miles de euros)")
+    ax.set_ylabel("Beneficio real (miles de euros)")
     ax.set_title("S-B1: beneficio frente a presupuesto")
     ax.legend()
     path = FIG/ "budget_sweep.png"
@@ -62,6 +62,7 @@ def main()-> None:
     ap.add_argument("--gap", type=float, default=0.01)
     ap.add_argument("--time-limit", type=int, default=600)
     ap.add_argument("--days", type=int, default=None, help="recortar el horizonte (pruebas)")
+    ap.add_argument("--relax-x", action="store_true", help="x continua (más rápido)")
     args = ap.parse_args()
 
     base = load(args.scenario, quiet=True)
@@ -89,7 +90,7 @@ def main()-> None:
     #Cordura: con PSI = 0, (b) = (a)
     b0 = table.loc[table["PSI"] == 0, "objetivo"].iloc[0]
     print(f"Comprobación PSI = 0: (a) = {row_a['objetivo']:,.0f} €  |  (b) = {b0:,.0f} €")
-    print(f"Figura: {plot(table, row_a['objetivo'])}")
+    print(f"Figura: {plot(table, row_a['beneficio_real'])}")
     print(f"Tablas en {OUT}")
 
 
