@@ -10,7 +10,7 @@ Orden:
      -> water -> economics -> prices
   2. Casos base: normal en modo operación (x entera y continua) e inversión
   3. Experimentos: escenarios climáticos (operación e inversión), agua,
-     sensibilidad física, presupuesto y precio de equilibrio del AW
+     sensibilidad física, presupuesto y precio de equilibrio del AW y sensibilidad económica
   4. Figuras (src/plots.py)
 
 La descarga del clima (weather.py) solo baja lo que falta: los CSV de
@@ -39,7 +39,8 @@ EXPERIMENTS = [["climate_runs.py", "--mode", "operation", "--relax-x"],
                ["sensitivity_physics.py", "--scenario", "normal", "--relax-x"],
                ["climate_runs.py", "--mode", "investment", "--relax-x"],
                ["budget_sweep.py", "--scenario", "normal", "--relax-x"],
-               ["aw_price_breakeven.py", "--relax-x"]]
+               ["aw_price_breakeven.py", "--relax-x"],
+               ["electricity_shock.py", "--scenario", "normal", "--relax-x"]]
 
 
 def run(script: Path, *args: str) -> None:
