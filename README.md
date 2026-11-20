@@ -5,7 +5,7 @@ Autoras: Jimena y Adriana.
 
 Modelo de programación lineal entera mixta (Pyomo) que decide, en bloques de 3 horas
 durante una temporada (424 bloques), **cuándo y con qué cañones producir nieve** en cada
-pista de Sierra Nevada, respetando el agua (concesión y balsas), la potencia eléctrica y el
+sector de Sierra Nevada, respetando el agua (concesión y balsas), la potencia eléctrica y el
 frío disponible, para maximizar el beneficio de la estación. Tiene dos modos:
 
 - **(a) Operación:** el parque de cañones actual es fijo; solo se decide la producción.
@@ -48,6 +48,7 @@ ordenador ocupado en otras tareas, así que con el equipo libre debería ser men
 | `climate_runs.py --mode investment` | 5 | 29 min |
 | `budget_sweep.py` | 9 | 35 min |
 | `aw_price_breakeven.py` | 21 | 3 h 24 min |
+| `electricity_shock.py` | 6 | 50 min |
 
 Los experimentos usan `--relax-x` (ver §6). Cada resolución tiene un límite de tiempo
 (`--time-limit`, 600 s por defecto); si se alcanza, se guarda la mejor solución
@@ -82,10 +83,14 @@ Clima, nieve y agua
   water.py              concesión, balsas, Q_MAX, entrada diaria -> water_energy.yaml, inflow.csv
 
 Estación, economía e inversión
-  economics.py          pistas, posiciones, tecnologías, ingresos, días clave
-                                                               -> pistas.csv, positions.csv, tech.csv,
-                                                                  revenue.csv, keydays.csv, economics.yaml
-  prices.py             precio horario OMIE -> precio por bloque -> prices.csv
+  (a mano)              plano de Cetursa 2025 y fuentes del informe
+                                                               -> pistas.csv, access.csv, positions.csv,
+                                                                  tech.csv, economics.yaml
+  economics.py          calendario de demanda, ingresos R, días clave
+                                                               -> revenue.csv, keydays.csv,
+                                                                  interim/calendario_demanda.csv
+  prices.py             OMIE cuartohorario -> horario -> bloque de 3 h + 0,04 €/kWh
+                                                               -> prices.csv
 
 Modelo
   load_data.py          junta todo lo anterior en un diccionario de datos
@@ -125,6 +130,7 @@ En el modo operación las variables de inversión `u` y `n` se fijan a 0.
 | `budget_sweep.py` | barrido de presupuesto de inversión | `budget_sweep.csv`, `budget_sweep_detalle.csv` |
 | `aw_price_breakeven.py` | precio de equilibrio de la tecnología AW | `aw_price_breakeven.csv` |
 | `climate_runs.py --mode investment` | escenarios climáticos con inversión | `climate_investment.csv` |
+| `electricity_shock.py` | sensibilidad económica: electricidad +30 %, θ y M_KM | `economic_sensitivity.csv` |
 
 Todos los scripts están en `src/experiments/` y aceptan `--solver`, `--gap`, `--time-limit`
 y `--relax-x`.
