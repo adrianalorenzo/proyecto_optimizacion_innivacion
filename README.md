@@ -35,8 +35,25 @@ python run_all.py --skip-data     # sin regenerar datos (usa data/processed tal 
 python run_all.py --only-plots    # solo rehace las figuras
 ```
 
-Tiempo aproximado con Gurobi: la ejecución completa tarda del orden de una hora
-(los experimentos usan `--relax-x`, ver §6).
+**Tiempo de ejecución.** La ejecución completa resuelve el modelo unas 60 veces y
+tarda varias horas. Tiempos orientativos con Gurobi en un portátil (19/11/2026, con el
+ordenador ocupado en otras tareas, así que con el equipo libre debería ser menos):
+
+| Paso | Resoluciones | Tiempo |
+|---|---|---|
+| Casos base (operación con x entera y continua, inversión) | 3 | 6 min |
+| `climate_runs.py --mode operation` | 5 | 1,5 min |
+| `water_pareto.py` | 15 | 4 min |
+| `sensitivity_physics.py` (incluye la validación) | 21 | 8 min |
+| `climate_runs.py --mode investment` | 5 | 29 min |
+| `budget_sweep.py` | 9 | 35 min |
+| `aw_price_breakeven.py` | 21 | 3 h 24 min |
+
+Los experimentos usan `--relax-x` (ver §6). Cada resolución tiene un límite de tiempo
+(`--time-limit`, 600 s por defecto); si se alcanza, se guarda la mejor solución
+encontrada y su *gap* aparece en la columna `gap` de los CSV. Conviene ejecutar con el
+ordenador enchufado y sin suspensión: Gurobi mide el tiempo real, y una suspensión a
+mitad de una resolución la detiene por límite de tiempo.
 
 Un caso suelto:
 
@@ -116,12 +133,15 @@ y `--relax-x`.
 
 - **x continua en los análisis (`--relax-x`).** El número de cañones encendidos es entero
   en el caso base; en los barridos se relaja a continuo. Diferencia en el objetivo < 1 %
-  y unas 5 veces más rápido (comparación en `results/normal_operation` frente a
+  y unas 9 veces más rápido (comparación en `results/normal_operation` frente a
   `results/normal_operation_relax`).
 - **Gap de optimalidad del 1 %** por defecto.
 - **beneficio_real** = ingresos − electricidad − inversión, *sin* la penalización de días
   clave; es el que se usa en tablas y figuras (el objetivo incluye la penalización).
-- **M_KM = 5.000 € por km incumplido en un día clave**, en `data/processed/economics.yaml`.
+- **Parámetros económicos** en `data/processed/economics.yaml`: penalización
+  M_KM = 5.000 € por km incumplido en un día clave, presupuesto PSI = 3 M€ (coste total),
+  tasa de descuento r = 5 % y θ = 0,23 (fracción de la temporada que cae en el horizonte,
+  para imputar la inversión). Costes de los equipos y vida útil en `data/processed/tech.csv`.
 
 ## 7. Estructura del repositorio
 
