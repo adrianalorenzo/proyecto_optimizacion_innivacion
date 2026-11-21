@@ -1,12 +1,12 @@
 """
-ingresos R_{p,d} (revenue.csv) y días clase con km mínimos L_d
+ingresos R_{p,d} (revenue.csv) y días clave con km mínimos L_d
 
 Idea. R_{p,d} = N_d* PRECIO_d * FACTOR_INGRESO * peso_p
 
     N_d: esquiadores potenciales del día d si toda la zona modelada está abierta
     PRECIO_d: forfait de 1 día adulto según el tipo de día (tarifas oficiales 2025/26)
     FACTOR_INGRESO: ingreso medio por esquiador / precio del forfait de día
-    peso_p: capcidad de remontes del sector p / capacidad total de los 17 sectores
+    peso_p: capacidad de remontes del sector p / capacidad total de los 17 sectores
 """
 
 from datetime import date, timedelta
