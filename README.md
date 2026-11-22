@@ -36,19 +36,19 @@ python run_all.py --only-plots    # solo rehace las figuras
 ```
 
 **Tiempo de ejecución.** La ejecución completa resuelve el modelo unas 60 veces y
-tarda varias horas. Tiempos orientativos con Gurobi en un portátil (19/11/2026, con el
-ordenador ocupado en otras tareas, así que con el equipo libre debería ser menos):
+tarda unas 4 h 40 min. Tiempos con Gurobi en un portátil (ejecución completa del
+22/11/2026, con el equipo libre):
 
 | Paso | Resoluciones | Tiempo |
 |---|---|---|
-| Casos base (operación con x entera y continua, inversión) | 3 | 6 min |
-| `climate_runs.py --mode operation` | 5 | 1,5 min |
-| `water_pareto.py` | 15 | 4 min |
-| `sensitivity_physics.py` (incluye la validación) | 21 | 8 min |
-| `climate_runs.py --mode investment` | 5 | 29 min |
-| `budget_sweep.py` | 9 | 35 min |
-| `aw_price_breakeven.py` | 21 | 3 h 24 min |
-| `electricity_shock.py` | 6 | 50 min |
+| Datos y casos base (operación con x entera y continua, inversión) | 3 | 8 min |
+| `climate_runs.py --mode operation` | 5 | 1 min |
+| `water_pareto.py` | 15 | 5 min |
+| `sensitivity_physics.py` (incluye la validación) | 21 | 14 min |
+| `climate_runs.py --mode investment` | 5 | 31 min |
+| `budget_sweep.py` | 9 | 32 min |
+| `aw_price_breakeven.py` | 21 | 2 h 48 min |
+| `electricity_shock.py` | 6 | 19 min |
 
 Los experimentos usan `--relax-x` (ver §6). Cada resolución tiene un límite de tiempo
 (`--time-limit`, 600 s por defecto); si se alcanza, se guarda la mejor solución

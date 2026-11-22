@@ -1,4 +1,4 @@
-# Parámetros de agua y energía (Persona A, src/water.py)
+# Parámetros de agua y energía (src/water.py)
 B_MAX: 200000
 B0: 200000
 W: 245000
