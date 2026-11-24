@@ -1,0 +1,33 @@
+{
+  "escenario": "calida",
+  "modo": "investment",
+  "solver": "gurobi",
+  "dias": 53,
+  "x_continua": true,
+  "estado": "maxTimeLimit",
+  "gap": 0.0335,
+  "t_construccion_s": 1.0,
+  "t_resolucion_s": 601.7,
+  "variables": 28219,
+  "enteras_o_binarias": 961,
+  "restricciones": 29877,
+  "objetivo": 2724604.25,
+  "revenue": 3337386.95,
+  "electricity": 96900.1,
+  "investment": 54582.6,
+  "penalty": 461300.0,
+  "beneficio_real": 3185904.25,
+  "agua_usada_m3": 240803.22,
+  "agua_pct_W": 98.29,
+  "bloques_caudal_max": 171,
+  "nieve_producida_m3": 482090.19,
+  "sector_dias_abiertos": 208,
+  "km_dia_medio": 11.68,
+  "km_incumplidos_total": 92.26,
+  "dias_clave_cumplidos": 1,
+  "posiciones_nuevas": 4,
+  "equipos_nuevos": {
+    "FAN": 75,
+    "AW": 0
+  }
+}

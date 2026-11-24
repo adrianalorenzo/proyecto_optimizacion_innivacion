@@ -1,0 +1,22 @@
+{
+  "escenario": "normal_plus2",
+  "modo": "operation",
+  "solver": "gurobi",
+  "dias": 53,
+  "x_continua": false,
+  "estado": "optimal",
+  "gap": 0.00342,
+  "t_construccion_s": 1.9,
+  "t_resolucion_s": 3.8,
+  "variables": 28144,
+  "enteras_o_binarias": 27189,
+  "restricciones": 28091,
+  "objetivo": 225466.23,
+  "electricity": 37682.14,
+  "agua_usada_m3": 64451.61,
+  "agua_pct_W": 26.31,
+  "bloques_caudal_max": 62,
+  "nieve_producida_m3": 129301.02,
+  "nieve_dia_clave_m3": 225843.05,
+  "sectores_con_V_dia_clave": 2
+}

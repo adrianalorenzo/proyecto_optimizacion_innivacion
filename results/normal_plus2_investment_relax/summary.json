@@ -1,0 +1,33 @@
+{
+  "escenario": "normal_plus2",
+  "modo": "investment",
+  "solver": "gurobi",
+  "dias": 53,
+  "x_continua": true,
+  "estado": "optimal",
+  "gap": 0.0,
+  "t_construccion_s": 0.9,
+  "t_resolucion_s": 202.4,
+  "variables": 28219,
+  "enteras_o_binarias": 961,
+  "restricciones": 29877,
+  "objetivo": -30277.68,
+  "revenue": 1823191.67,
+  "electricity": 102086.08,
+  "investment": 56383.27,
+  "penalty": 1695000.0,
+  "beneficio_real": 1664722.32,
+  "agua_usada_m3": 226562.96,
+  "agua_pct_W": 92.47,
+  "bloques_caudal_max": 163,
+  "nieve_producida_m3": 454279.62,
+  "sector_dias_abiertos": 142,
+  "km_dia_medio": 7.52,
+  "km_incumplidos_total": 339.0,
+  "dias_clave_cumplidos": 4,
+  "posiciones_nuevas": 3,
+  "equipos_nuevos": {
+    "FAN": 55,
+    "AW": 1
+  }
+}

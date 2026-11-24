@@ -66,7 +66,7 @@ python src/solve.py --scenario normal --mode investment --relax-x   # x continua
 
 Los resultados se guardan en `results/<escenario>_<modo>[_relax]/` (CSV por variable y
 `summary.json` con los KPIs), los experimentos en `results/experiments/` y las figuras en
-`results/figures/`. La carpeta `results/` no se sube a git: se regenera con `run_all.py`.
+`results/figures/`. La carpeta `results/` contiene los resultados de la ejecución completa del 22/11/2026 que aparecen en el informe; se puede regenerar con `run_all.py`.
 
 ## 3. Flujo de datos
 

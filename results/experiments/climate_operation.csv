@@ -1,0 +1,6 @@
+escenario,modo,solver,dias,x_continua,estado,gap,t_construccion_s,t_resolucion_s,variables,enteras_o_binarias,restricciones,objetivo,revenue,electricity,investment,penalty,beneficio_real,agua_usada_m3,agua_pct_W,bloques_caudal_max,nieve_producida_m3,sector_dias_abiertos,km_dia_medio,km_incumplidos_total,dias_clave_cumplidos,carpeta
+fria,operation,gurobi,53,True,optimal,0.00681,0.5,1.4,28159,901,29877,5169990.15,5241296.51,71306.36,0.0,0.0,5169990.15,199430.53,81.4,148,398984.82,381,27.55,0.0,16,results\fria_operation_relax
+normal,operation,gurobi,53,True,optimal,0.00547,0.9,24.3,28159,901,29877,1573202.13,3017311.83,86309.7,0.0,1357800.0,2931002.13,245000.0,100.0,184,490184.18,207,11.58,271.56,4,results\normal_operation_relax
+calida,operation,gurobi,53,True,optimal,0.0,0.7,27.0,28159,901,29877,1854132.51,2657097.74,64415.23,0.0,738550.0,2592682.51,177138.57,72.3,128,354277.13,172,11.34,147.71,0,results\calida_operation_relax
+normal_plus1,operation,gurobi,53,True,optimal,0.00447,0.9,19.0,28159,901,29877,627100.86,2276320.2,93769.34,0.0,1555450.0,2182550.86,240360.71,98.11,184,481275.92,135,7.12,311.09,4,results\normal_plus1_operation_relax
+normal_plus2,operation,gurobi,53,True,optimal,0.0,0.7,5.8,28159,901,29877,-147711.98,1654164.48,75176.46,0.0,1726700.0,1578988.02,193621.44,79.03,148,387682.21,123,6.26,345.34,0,results\normal_plus2_operation_relax

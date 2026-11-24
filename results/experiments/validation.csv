@@ -1,0 +1,4 @@
+prueba,resultado,ok
+Sin agua (W ≈ 0) no se produce nieve,0.0,True
+Con +20 °C solo produce el all-weather (m³ de ventilador),0.0,True
+"% del agua usado de 21 h a 6 h (3 de 8 bloques -> 37,5 % si fuera uniforme)",39.6,True

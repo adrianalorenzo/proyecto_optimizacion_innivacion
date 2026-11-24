@@ -1,0 +1,27 @@
+{
+  "escenario": "normal",
+  "modo": "investment",
+  "solver": "gurobi",
+  "dias": 53,
+  "x_continua": false,
+  "estado": "optimal",
+  "gap": 0.00492,
+  "t_construccion_s": 0.9,
+  "t_resolucion_s": 1.7,
+  "variables": 28204,
+  "enteras_o_binarias": 27249,
+  "restricciones": 28091,
+  "objetivo": 524776.38,
+  "electricity": 688277.64,
+  "agua_usada_m3": 108621.24,
+  "agua_pct_W": 44.34,
+  "bloques_caudal_max": 175,
+  "nieve_producida_m3": 241146.87,
+  "nieve_dia_clave_m3": 531659.15,
+  "sectores_con_V_dia_clave": 1,
+  "posiciones_nuevas": 0,
+  "equipos_nuevos": {
+    "FAN": 13,
+    "AW": 893
+  }
+}
